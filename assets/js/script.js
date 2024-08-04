@@ -1,3 +1,4 @@
+
 // Retrieve tasks and nextId from localStorage
 let taskList = JSON.parse(localStorage.getItem("tasks"));
 let nextId = JSON.parse(localStorage.getItem("nextId"));
@@ -9,13 +10,21 @@ function generateTaskId() {
 }
 
 // Todo: create a function to create a task card
-function createTaskCard(task) {
-  const cardSkel=`<div class="card draggable">
-                 <div class="card-body">
-                  ${task.Title}, ${task.Date}, ${task.Desc}
-                 </div>
-                 </div>`;
-  $('#todo-cards').prepend(cardSkel)
+function createTaskCard(task){
+  const cardSkel=`<div class="card task ui-state-default" id="${task.id}">
+  <div class="card-header"><h2>${task.Title}</h2></div>
+  <div class="card-body">
+  <p>${task.Date}</p>
+  <p>${task.Desc}</p>
+  <button class="deleter">Delete</button>
+  </div>
+  </div>
+  `
+  $('#todo-cards').prepend(cardSkel);
+
+  $('.deleter').on('click', function(){
+     $(this).parent().parent().remove();
+      })
 }
 
 
@@ -36,7 +45,28 @@ buttons: {
 
 
 // Todo: create a function to render the task list and make cards draggable
-
+function makeDraggable () {
+  $("#todo-cards").sortable({
+    connectWith:"#in-progress-cards, #done-cards",
+    dropOnEmpty:true,
+    items:"> .task",
+    helper:'clone'
+    
+  })
+  $("#done-cards").sortable({
+    connectWith:"#in-progress-cards, #todo-cards",
+    dropOnEmpty:true,
+    items:"> .task",
+    helper:'clone'
+    
+  })
+  $("#in-progress-cards").sortable({
+    connectWith:"#todo-cards, #done-cards",
+    dropOnEmpty:true,
+    items:"> .task",
+    helper:"clone"
+  })
+}
 
 // Todo: create a function to handle adding a new task
 function handleAddTask(){
@@ -54,8 +84,8 @@ function handleAddTask(){
 
   console.log(task)
   createTaskCard(task);
+  makeDraggable();
 }
-
 
 
 // Todo: create a function to handle deleting a task
@@ -80,4 +110,6 @@ $("#add-task-button").on("click", function() {
 const form = dialog.find( "form" ).on( "submit", function( event ) {
   event.preventDefault();
   handleAddTask();
+
+
 });

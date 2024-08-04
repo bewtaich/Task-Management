@@ -23,3 +23,26 @@ textarea {
   border-bottom: 1px solid #dddddd ;
 }
 
+.task {
+  margin:20px;
+  margin-bottom:10px;
+  z-index:5;
+  
+}
+
+.todo > div{
+  background-color: red;
+}
+
+.inProgress > div{
+  background-color: yellow;
+}
+
+.done > div {
+  background-color: green;
+}
+
+.sortable {
+  min-width: 100%;
+  min-height: 100%;
+}
