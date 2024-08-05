@@ -2,6 +2,7 @@
 // Retrieve tasks and nextId from localStorage
 let taskList = JSON.parse(localStorage.getItem("tasks"));
 let nextId = JSON.parse(localStorage.getItem("nextId"));
+const today = dayjs();
 
 // Todo: create a function to generate a unique task id
 function generateTaskId() {
@@ -11,22 +12,19 @@ function generateTaskId() {
 
 // Todo: create a function to create a task card
 function createTaskCard(task){
+
   const cardSkel=`<div class="card task ui-state-default" id="${task.id}">
   <div class="card-header"><h2>${task.Title}</h2></div>
   <div class="card-body">
-  <p>${task.Date}</p>
+  <p>Due: ${task.Date}</p>
   <p>${task.Desc}</p>
   <button class="deleter">Delete</button>
   </div>
   </div>
   `
   $('#todo-cards').prepend(cardSkel);
-
-  $('.deleter').on('click', function(){
-     $(this).parent().parent().remove();
-      })
+ 
 }
-
 
 const dialog = 
 $("#task-dialog-form").dialog({
@@ -84,18 +82,28 @@ function handleAddTask(){
 
   console.log(task)
   createTaskCard(task);
+  handleDeleteTask()
   makeDraggable();
+  handleDrop(task);
+  dialog.dialog('close')
 }
 
 
 // Todo: create a function to handle deleting a task
 function handleDeleteTask(event){
-
+  $('.deleter').on('click', function(){
+    $(this).parent().parent().remove();
+     })
 }
 
 // Todo: create a function to handle dropping a task into a new status lane
-function handleDrop(event, ui) {
-
+function handleDrop(task, ui) {
+  const due = dayjs(task.Date);
+  if (today.isAfter(due)){
+    $(`#${task.id}`).attr('class',"card task ui-state-default late")
+  } else if ((today<due)&&(today>=(due.subtract(3,'day')))){
+    $(`#${task.id}`).attr('class',"card task ui-state-default soon")
+  }
 }
 
 // Todo: when the page loads, render the task list, add event listeners, make lanes droppable, and make the due date field a date picker
@@ -107,9 +115,12 @@ $("#add-task-button").on("click", function() {
   });
 });
 
+$('#taskDate').datepicker();
+
 const form = dialog.find( "form" ).on( "submit", function( event ) {
   event.preventDefault();
   handleAddTask();
-
+  handleDeleteTask()
+  makeDraggable();
 
 });

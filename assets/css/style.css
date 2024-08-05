@@ -30,16 +30,21 @@ textarea {
   
 }
 
-.todo > div{
-  background-color: red;
+.late > div{
+  background-color: rgb(255, 68, 68);
+  color:white;
+}
+.late .card-header {
+  background-color: rgb(235, 53, 53);
+
+}
+.soon > div{
+  background-color: rgb(238, 219, 49);
+  color:white;
 }
 
-.inProgress > div{
-  background-color: yellow;
-}
-
-.done > div {
-  background-color: green;
+.soon .card-header {
+  background-color: rgb(219, 202, 46);
 }
 
 .sortable {
