@@ -11,7 +11,7 @@
     integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous" />
   <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet" />
 
-  
+
 
   <link rel="stylesheet" href="./assets/css/style.css" />
   <title>Task Board</title>
@@ -24,20 +24,24 @@
   </header>
   <div class="container">
     <div class="text-center mb-5">
-      <button class="btn btn-success" id='add-task-button' data-bs-toggle="modal" data-bs-target="#formModal">Add Task</button>
+      <button class="btn btn-success" id='add-task-button' data-bs-toggle="modal" data-bs-target="#formModal">Add
+        Task</button>
     </div>
     <!-- Todo: Create a modal with a form to add tasks -->
 
     <div id="task-dialog-form" class="ui-widget" title="Add Task">
       <form id="task-form">
         <fieldset class="container">
-          <div class="row"><label for="taskTitle">Task Title</label>
-          <input type="text" id="taskTitle" class="text ui-widget-content col" required>
-          <label for="taskDate">Task Due Date</label>
-          <input id="taskDate" class="text ui-widget-content col" required></div>
+          <div class="row">
+            <label for="taskTitle">Task Title</label>
+            <input type="text" id="taskTitle" class="text ui-widget-content col" required>
+            <label for="taskDate">Task Due Date</label>
+            <input id="taskDate" class="text ui-widget-content col" required>
+          </div>
           <label for="taskDesc">Task Description</label>
           <textarea id="taskDesc" class="text ui-widget-content" required></textarea>
-          <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
+          <!-- <button type="submit" value='Add Task*' tabindex="-1" >Add Task*</button> -->
+
         </fieldset>
       </form>
     </div>
@@ -75,16 +79,16 @@
             <div id="in-progress-cards" class="inProgress sortable"></div>
           </div>
         </div>
+      </div>
+      <div class="col-12 col-lg-4 d-flex">
+        <div id="done" class="card border-light mb-3 lane flex-grow-1">
+          <div class="card-header bg-white">
+            <h2 class="card-title mb-1">Done</h2>
+          </div>
+          <div class="card-body bg-light">
+            <div id="done-cards" class="done sortable"></div>
+          </div>
         </div>
-        <div class="col-12 col-lg-4 d-flex">
-          <div id="done" class="card border-light mb-3 lane flex-grow-1">
-            <div class="card-header bg-white">
-              <h2 class="card-title mb-1">Done</h2>
-            </div>
-            <div class="card-body bg-light">
-              <div id="done-cards" class="done sortable"></div>
-          </div>
-          </div>
       </div>
     </div>
   </div>
@@ -92,8 +96,8 @@
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-    crossorigin="anonymous"></script>  
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
   <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/dayjs@1.11.3/dayjs.min.js"
     integrity="sha256-iu/zLUB+QgISXBLCW/mcDi/rnf4m4uEDO0wauy76x7U=" crossorigin="anonymous"></script>
